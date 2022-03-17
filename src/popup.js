@@ -1,10 +1,12 @@
-// Initialize button with user's preferred color
 let start = document.getElementById("start");
 let end = document.getElementById("end");
+let copyAddress = document.getElementById("copy-address");
 
 var myInterval;
-// When the button is clicked, inject setPageBackgroundColor into current page
 start.addEventListener("click", async () => {
+  start.innerHTML = "Starting...";
+  start.disabled = true;
+
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   let selectE = document.getElementById("map");
   let mapSelected = selectE.value;
@@ -16,7 +18,15 @@ start.addEventListener("click", async () => {
   });
 });
 
+copyAddress.addEventListener("click", async () => {
+  navigator.clipboard.writeText("0xb7e8efa2a7814d4328d2e71ebd73863365056f07");
+  alert("Copy success: " + "0xb7e8efa2a7814d4328d2e71ebd73863365056f07");
+});
+
 end.addEventListener("click", async () => {
+  start.innerHTML = "Start";
+  start.disabled = false;
+
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
@@ -26,13 +36,9 @@ end.addEventListener("click", async () => {
 
 function handleClearInterval() {
   clearInterval(myInterval);
-  console.log("ended");
 }
 
-// The body of this function will be executed as a content script inside the
-// current page
 function setPageBackgroundColor(mapSelected) {
-  console.log(mapSelected, "mapSelected");
   const myIframe = document.getElementsByTagName("iframe")[0];
   if (!myIframe) return;
   let myElement =
@@ -125,9 +131,6 @@ function setPageBackgroundColor(mapSelected) {
 
   myInterval = setInterval(async () => {
     for (let y = 0; y < positions.length; y++) {
-      if (y == 2 && mapSelected == "2-1") {
-        await new Promise((r) => setTimeout(r, 50));
-      }
       const touchObj = new Touch({
         identifier: Date.now(),
         target: myElement,

@@ -38,24 +38,23 @@ function setPageBackgroundColor(mapSelected) {
   let myElement =
     myIframe.contentWindow.document.getElementsByTagName("canvas")[0];
   if (!myElement) return;
-
   const mapConfig = {
     "1-1": [
       {
-        x: 658.2,
-        y: 353.6,
+        x: 658.5,
+        y: 350,
       },
       {
-        x: 118.7,
-        y: 141,
+        x: 632.5,
+        y: 120,
       },
       {
-        x: 538.9,
-        y: 197.8,
+        x: 540.5,
+        y: 204,
       },
       {
-        x: 473.5,
-        y: 132.8,
+        x: 452.5,
+        y: 124,
       },
     ],
     "1-2": [

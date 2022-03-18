@@ -19,8 +19,16 @@ start.addEventListener("click", async () => {
 });
 
 copyAddress.addEventListener("click", async () => {
-  navigator.clipboard.writeText("0xb7e8efa2a7814d4328d2e71ebd73863365056f07");
-  alert("Copy success: " + "0xb7e8efa2a7814d4328d2e71ebd73863365056f07");
+  navigator.clipboard
+    .writeText("0xb7e8efa2a7814d4328d2e71ebd73863365056f07")
+    .then(
+      function () {
+        alert("Copy success: " + "0xb7e8efa2a7814d4328d2e71ebd73863365056f07");
+      },
+      function () {
+        alert("Copy failed");
+      }
+    );
 });
 
 end.addEventListener("click", async () => {

@@ -15,7 +15,7 @@ button {
   padding: 3px 8px;
   border: 0.5px solid;
 }
-button:hover {
+button:active {
   transform: translateY(1px);
 }
 button:disabled {

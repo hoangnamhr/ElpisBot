@@ -1,22 +1,40 @@
-// Initialize button with user's preferred color
 let start = document.getElementById("start");
 let end = document.getElementById("end");
+let copyAddress = document.getElementById("copy-address");
 
 var myInterval;
-// When the button is clicked, inject setPageBackgroundColor into current page
 start.addEventListener("click", async () => {
+  start.innerHTML = "Starting...";
+  start.disabled = true;
+  performance = 10;
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   let selectE = document.getElementById("map");
   let mapSelected = selectE.value;
 
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    function: setPageBackgroundColor,
-    args: [mapSelected],
+    function: startGame,
+    args: [mapSelected, start],
   });
 });
 
+copyAddress.addEventListener("click", async () => {
+  navigator.clipboard
+    .writeText("0xb7e8efa2a7814d4328d2e71ebd73863365056f07")
+    .then(
+      function () {
+        alert("Copy success: " + "0xb7e8efa2a7814d4328d2e71ebd73863365056f07");
+      },
+      function () {
+        alert("Copy failed");
+      }
+    );
+});
+
 end.addEventListener("click", async () => {
+  start.innerHTML = "Start";
+  start.disabled = false;
+
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
@@ -26,108 +44,122 @@ end.addEventListener("click", async () => {
 
 function handleClearInterval() {
   clearInterval(myInterval);
-  console.log("ended");
 }
 
-// The body of this function will be executed as a content script inside the
-// current page
-function setPageBackgroundColor(mapSelected) {
-  console.log(mapSelected, "mapSelected");
+function startGame(mapSelected) {
   const myIframe = document.getElementsByTagName("iframe")[0];
   if (!myIframe) return;
   let myElement =
     myIframe.contentWindow.document.getElementsByTagName("canvas")[0];
   if (!myElement) return;
-
   const mapConfig = {
     "1-1": [
       {
-        x: 658.2,
-        y: 353.6,
+        x: 656.5,
+        y: 351.3,
       },
       {
-        x: 118.7,
-        y: 141,
+        x: 584.5,
+        y: 91.3,
       },
       {
-        x: 538.9,
-        y: 197.8,
+        x: 540.5,
+        y: 203.3,
       },
       {
-        x: 473.5,
-        y: 132.8,
-      },
-    ],
-    "1-2": [
-      {
-        x: 658.2,
-        y: 353.6,
-      },
-      {
-        x: 540.7,
-        y: 198.4,
-      },
-      {
-        x: 473.5,
-        y: 132.8,
+        x: 456.5,
+        y: 131.3,
       },
     ],
     "1-3": [
       {
-        x: 665.2,
-        y: 352.6,
+        x: 668.5,
+        y: 349.3,
       },
       {
-        x: 118.7,
-        y: 141,
+        x: 641.8,
+        y: 137.3,
       },
       {
-        x: 573.2,
-        y: 270,
+        x: 577.8,
+        y: 280,
       },
       {
-        x: 542,
-        y: 201,
+        x: 444.2,
+        y: 214.2,
       },
       {
-        x: 463.7,
-        y: 177.4,
+        x: 535.1,
+        y: 198.6,
+      },
+      {
+        x: 472.5,
+        y: 172,
+      },
+    ],
+    "1-4": [
+      {
+        x: 665.0,
+        y: 350.8,
+      },
+      {
+        x: 656.5,
+        y: 128.9,
+      },
+      {
+        x: 436.7,
+        y: 277.2,
+      },
+      {
+        x: 570.1,
+        y: 283.6,
+      },
+      {
+        x: 457.0,
+        y: 226,
+      },
+      {
+        x: 550.9,
+        y: 202.5,
+      },
+      {
+        x: 461.3,
+        y: 231.3,
       },
     ],
     "2-1": [
       {
-        x: 660.7,
-        y: 356,
+        x: 659.7,
+        y: 350,
       },
       {
-        x: 118.7,
-        y: 141,
+        x: 621.3,
+        y: 111.0,
       },
       {
-        x: 427.3,
-        y: 224.6,
+        x: 455.9,
+        y: 206,
       },
       {
-        x: 488.7,
-        y: 286,
+        x: 492.2,
+        y: 279.6,
       },
       {
-        x: 575.9,
-        y: 277.6,
+        x: 578.6,
+        y: 279.6,
       },
       {
-        x: 465.5,
-        y: 132.8,
+        x: 463.4,
+        y: 135.6,
       },
     ],
   };
-
   let positions = mapConfig[mapSelected];
 
   myInterval = setInterval(async () => {
     for (let y = 0; y < positions.length; y++) {
-      if (y == 2 && mapSelected == "2-1") {
-        await new Promise((r) => setTimeout(r, 50));
+      if (y == 2) {
+        await new Promise((r) => setTimeout(r, 20));
       }
       const touchObj = new Touch({
         identifier: Date.now(),
@@ -161,7 +193,7 @@ function setPageBackgroundColor(mapSelected) {
       });
 
       myElement.dispatchEvent(touchEventEnd);
-      await new Promise((r) => setTimeout(r, 50));
+      await new Promise((r) => setTimeout(r, 150));
     }
-  }, 500);
+  }, 900);
 }

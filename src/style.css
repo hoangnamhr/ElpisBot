@@ -1,5 +1,25 @@
 body {
-  width: 100px;
+  width: 150px;
+  font-size: 13px;
+}
+.title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.donate {
+  margin-top: 5px;
+}
+button {
+  border-radius: 3px;
+  padding: 3px 8px;
+  border: 0.5px solid;
+}
+button:active {
+  transform: translateY(1px);
+}
+button:disabled {
+  opacity: 0.9;
 }
 select {
   width: 100%;

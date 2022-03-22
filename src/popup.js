@@ -20,10 +20,10 @@ start.addEventListener("click", async () => {
 
 copyAddress.addEventListener("click", async () => {
   navigator.clipboard
-    .writeText("0xb7e8efa2a7814d4328d2e71ebd73863365056f07")
+    .writeText("0x879675e5E1Ef4c8EDDb6F21B847B18C92279F04A")
     .then(
       function () {
-        alert("Copy success: " + "0xb7e8efa2a7814d4328d2e71ebd73863365056f07");
+        alert("Copy success: " + "0x879675e5E1Ef4c8EDDb6F21B847B18C92279F04A");
       },
       function () {
         alert("Copy failed");
@@ -153,6 +153,126 @@ function startGame(mapSelected) {
         y: 135.6,
       },
     ],
+    "3-4": [
+      {
+        x: 656.5,
+        y: 342,
+      },
+      {
+        x: 608.8,
+        y: 88,
+      },
+      {
+        x: 440.5,
+        y: 220.66,
+      },
+      {
+        x: 523.16,
+        y: 131.33,
+      },
+      {
+        x: 545.8,
+        y: 204.6,
+      },
+      {
+        x: 463.16,
+        y: 288.66,
+      },
+      {
+        x: 455.16,
+        y: 140,
+      },
+    ],
+    "3-11": [
+      {
+        x: 656.5,
+        y: 342,
+      },
+      {
+        x: 608.8,
+        y: 88,
+      },
+      {
+        x: 464.5,
+        y: 268.6,
+      },
+      {
+        x: 575.16,
+        y: 271.33,
+      },
+      {
+        x: 436.5,
+        y: 199.33,
+      },
+      {
+        x: 425.8,
+        y: 139.33,
+      },
+      {
+        x: 451.16,
+        y: 164,
+      },
+    ],
+    "3-14": [
+      {
+        x: 656.5,
+        y: 342,
+      },
+      {
+        x: 608.8,
+        y: 88,
+      },
+      {
+        x: 413.83,
+        y: 168.66,
+      },
+      {
+        x: 509.8,
+        y: 134,
+      },
+      {
+        x: 539.16,
+        y: 191,
+      },
+      {
+        x: 459.16,
+        y: 264.66,
+      },
+      {
+        x: 452.5,
+        y: 228.66,
+      },
+    ],
+    "4-4": [
+      {
+        x: 656.5,
+        y: 342,
+      },
+      {
+        x: 608.8,
+        y: 88,
+      },
+      {
+        x: 439.16,
+        y: 175.33,
+      },
+      {
+        x: 549.83,
+        y: 199.33,
+      },
+      {
+        x: 460.5,
+        y: 290,
+      },
+      {
+        x: 587.16,
+        y: 278,
+      },
+      {
+        x: 455.16,
+        y: 140,
+      },
+    ],
   };
   let positions = mapConfig[mapSelected];
 
@@ -193,7 +313,7 @@ function startGame(mapSelected) {
       });
 
       myElement.dispatchEvent(touchEventEnd);
-      await new Promise((r) => setTimeout(r, 150));
+      await new Promise((r) => setTimeout(r, 50));
     }
-  }, 900);
+  }, 500);
 }

@@ -1,6 +1,5 @@
 let start = document.getElementById("start");
 let end = document.getElementById("end");
-let copyAddress = document.getElementById("copy-address");
 
 var myInterval;
 start.addEventListener("click", async () => {
@@ -16,19 +15,6 @@ start.addEventListener("click", async () => {
     function: startGame,
     args: [mapSelected, start],
   });
-});
-
-copyAddress.addEventListener("click", async () => {
-  navigator.clipboard
-    .writeText("0x879675e5E1Ef4c8EDDb6F21B847B18C92279F04A")
-    .then(
-      function () {
-        alert("Copy success: " + "0x879675e5E1Ef4c8EDDb6F21B847B18C92279F04A");
-      },
-      function () {
-        alert("Copy failed");
-      }
-    );
 });
 
 end.addEventListener("click", async () => {
